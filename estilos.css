@@ -1,1 +1,188 @@
+/* --- VARIABLES DE COLOR Y FUENTES (TEMA COQUETTE PASTEL) --- */
+:root {
+    --color-fondo: #fff0f5; /* Rosa muy pálido */
+    --color-texto: #5c4742; /* Marrón suave */
+    --color-ramo: #ffffff;
+    --color-ramo-borde: #e6e6fa; /* Lavanda pálido */
+    --color-aprobado: #d4edda; /* Verde menta pastel */
+    --color-aprobado-texto: #155724;
+    --color-bloqueado: #f5f5f5;
+    --color-bloqueado-texto: #a0a0a0;
+    --color-acento: #ffb6c1; /* Rosa claro */
+    --sombra: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --fuente-titulos: 'Playfair Display', serif;
+    --fuente-cuerpo: 'Poppins', sans-serif;
+}
 
+/* --- ESTILOS GENERALES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fuente-cuerpo);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+/* --- ENCABEZADO Y PIE DE PÁGINA --- */
+header, footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: white;
+    box-shadow: var(--sombra);
+}
+
+header h1 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-acento);
+    font-size: 2.5rem;
+}
+
+/* --- CONTENEDOR PRINCIPAL DE LA MALLA --- */
+#malla-curricular {
+    display: flex;
+    flex-wrap: nowrap; /* Evita que los semestres se envuelvan */
+    overflow-x: auto; /* Permite el scroll horizontal en pantallas pequeñas */
+    padding: 2rem;
+    gap: 1.5rem;
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+}
+
+/* --- COLUMNAS DE SEMESTRE --- */
+.semestre {
+    flex: 0 0 280px; /* No crece, no se encoge, base de 280px */
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--sombra);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--color-ramo-borde);
+}
+
+.semestre h2 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-acento);
+    border-bottom: 2px solid var(--color-ramo-borde);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.semestre ul {
+    list-style: none;
+}
+
+/* --- ESTILOS DE LOS RAMOS (ASIGNATURAS) --- */
+.ramo {
+    background-color: var(--color-ramo);
+    border: 1px solid var(--color-ramo-borde);
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 400;
+    position: relative;
+    overflow: hidden;
+}
+
+.ramo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- ESTADOS DE LOS RAMOS --- */
+
+/* Ramo Aprobado */
+.ramo.aprobado {
+    background-color: var(--color-aprobado);
+    color: var(--color-aprobado-texto);
+    text-decoration: line-through;
+    text-decoration-color: var(--color-acento);
+    text-decoration-thickness: 2px;
+    border-color: #c3e6cb;
+}
+
+/* Ramo Bloqueado */
+.ramo.bloqueado {
+    background-color: var(--color-bloqueado);
+    color: var(--color-bloqueado-texto);
+    cursor: not-allowed;
+    border-color: #e0e0e0;
+}
+
+.ramo.bloqueado:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Hitos Especiales */
+.hito {
+    background: linear-gradient(45deg, var(--color-acento), #ffd1dc);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+}
+
+.hito.aprobado {
+    background: linear-gradient(45deg, #28a745, #218838);
+    text-decoration: none;
+}
+
+/* --- NOTIFICACIONES --- */
+#notificacion-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notificacion {
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.5s forwards;
+}
+
+.notificacion.exito {
+    background-color: #28a745; /* Verde éxito */
+}
+
+.notificacion.error {
+    background-color: #dc3545; /* Rojo error */
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- DISEÑO RESPONSIVO --- */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    #malla-curricular {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .semestre {
+        flex: 0 0 250px; /* Columnas un poco más pequeñas en tablet */
+    }
+}
